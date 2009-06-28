@@ -1,0 +1,21 @@
+name: Selector
+description: Select HTML or XML elements as you type.
+author:
+    name: Pistos
+    email: somebody@example.com
+    uri: http://blog.purepistos.net
+version: 1.0.0
+uris:
+    homepage: http://github.com/Pistos/dk-selector
+    repository: git://github.com/Pistos/dk-selector.git
+licence: MIT
+diakonos:
+    minimum: 0.8.11
+    tested:
+        - 0.8.11
+notes: >
+    This extension uses Nokogiri to let you type in a selector (either CSS or
+    XPath) and see the parts of the current XML/HTML document which match that
+    selector.
+
+    Press <Alt-/> to activate the function.
