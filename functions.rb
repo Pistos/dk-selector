@@ -4,31 +4,31 @@ module Diakonos
   module Functions
 
     def selector_grep
-      text = @current_buffer.to_a.join( "\n" )
-      doc = case @current_buffer.original_language
-        when 'html'
-          Nokogiri::HTML( text )
-        when 'xml'
-          Nokogiri::XML( text )
-      end
+      doc = current_buffer_doc
+      return  if doc.nil?
 
-      if doc
-        @rlh_selector ||= []
-        selector = get_user_input( 'Selector: ', history: @rlh_selector )
-        results = doc.search( selector )
-        if results.any?
-          results_file = File.join( @diakonos_home, 'selector.xml' )
-          File.open( results_file, 'w' ) do |f|
+      @rlh_selector ||= []
+      get_user_input( 'Selector: ', history: @rlh_selector ) do |input|
+        next  if input.empty?
+
+        results_file = File.join( @diakonos_home, 'selector.xml' )
+        File.open( results_file, 'w' ) do |f|
+          results = doc.search( input )
+          if results.empty?
+            f.puts "(nothing matches '#{input}')"
+          else
             results.each do |match|
               f.puts match
-              f.puts "<!-- ------------------------------------ -->"
+              f.puts
             end
           end
-          open_file results_file
-        else
-          set_iline "(no matches)"
         end
+        open_file results_file
       end
+    end
+
+    def selector_highlight
+
     end
 
   end
