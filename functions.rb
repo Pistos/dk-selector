@@ -11,19 +11,23 @@ module Diakonos
       get_user_input( 'Selector: ', history: @rlh_selector ) do |input|
         next  if input.empty?
 
-        results_file = File.join( @diakonos_home, 'selector.xml' )
-        File.open( results_file, 'w' ) do |f|
+        begin
           results = doc.search( input )
-          if results.empty?
-            f.puts "(nothing matches '#{input}')"
-          else
-            results.each do |match|
-              f.puts match
-              f.puts
+          results_file = File.join( @diakonos_home, 'selector.xml' )
+          File.open( results_file, 'w' ) do |f|
+            if results.empty?
+              f.puts "(nothing matches '#{input}')"
+            else
+              results.each do |match|
+                f.puts match
+                f.puts
+              end
             end
           end
+          open_file results_file
+        rescue Nokogiri::SyntaxError => e
+          # swallow
         end
-        open_file results_file
       end
     end
 
