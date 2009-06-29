@@ -8,10 +8,16 @@ uris:
     homepage: http://github.com/Pistos/dk-selector
     repository: git://github.com/Pistos/dk-selector.git
 licence: MIT
-diakonos:
-    minimum: 0.8.11
-    tested:
-        - 0.8.11
+requirements:
+    diakonos:
+        minimum: 0.8.11
+        tested:
+            - 0.8.11
+    gems:
+        - nokogiri:
+            minimum: 1.2.0
+            tested:
+                - 1.2.1
 notes: >
     This extension uses Nokogiri to let you type in a selector (either CSS or
     XPath) and see the parts of the current XML/HTML document which match that
