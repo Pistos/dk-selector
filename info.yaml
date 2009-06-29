@@ -2,7 +2,6 @@ name: Selector
 description: Select HTML or XML elements as you type.
 author:
     name: Pistos
-    email: somebody@example.com
     uri: http://blog.purepistos.net
 version: 1.0.0
 uris:
